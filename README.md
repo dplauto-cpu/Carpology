@@ -10,25 +10,24 @@
 
 ## 📋 Project description
 
-This project applies **Machine Learning** techniques to isotopic data (δ13C and δ15N) from archaeological cereals (wheat and barley) originating from sites across Europe and the Mediterranean.
+This project applies **Machine Learning** techniques to isotopic data (δ13C and δ15N) from archaeological cereals (mostly wheat and barley) gathered from sites across Europe and the Mediterranean.
 
 The aim is to explore whether isotopic patterns can help to:
-- **Date** archaeological samples without carbon-14
+- **Stablish a chonological framework** for archaeological samples without 14C
 - **Identify species** (wheat vs barley) in charred grains
 - **Estimate growing conditions** (water stress and manuring)
-- **Trace geographical origin** of cereals
-- **Discover regions** with similar agricultural practices
+- **Trace geographical origins** of cereals and regions with similar agricultural practices
 
 ---
 
-## 🗂️ Repository structure
+## 🗂️ Repository
 
 ancient-crops-ml/  
 │  
 ├── data/  
-│ ├── carpo_nuevo.csv # Main dataset (2,323 samples)  
+│ ├── maia_plants.csv # Maia dataset (2,323 samples)  
 │ ├── trigo_cebada_clean_ML.csv # Secondary dataset (3,344 samples)  
-│ └── neo_plants.csv # Merged dataset (2,323 × 24)  
+│ └── neo_plants.csv # Main (merged) dataset (2,323 × 24)  
 │  
 ├── notebooks/  
 │ ├── 01_EDA.ipynb # Exploratory analysis  
@@ -46,7 +45,7 @@ ancient-crops-ml/
 ## 📊 Dataset
 
 ### Data source
-The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAta), which compiles isotopic information from the early Neolithic to the end of the Iron Age (approx. 6000-600 BCE), merged with a smaller dataset gathered by Carlota Pintado at the UBU (University of Burgos). For the sake of this exercise uniquely the entries and variables of interest habe been merged into a new dataset: `neo_plants`.
+The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAta), which compiles isotopic information from the early Neolithic to the end of the Iron Age (approx. 6000-600 BCE), merged with another dataset gathered by Carlota Pintado at the UBU (IsoTOPIKLab, University of Burgos). For the sake of this exercise the entries and variables of interest habe been merged into a new dataset: `neo_plants`.
 
 ### Merged dataset (`neo_plants.csv`)
 
@@ -71,7 +70,7 @@ The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAt
 
 ---
 
-## 🎯 Proposed models (note that is a preliminary state)
+## 🎯 Proposed models (note that this is a preliminary state and it may change)
 
 | # | Problem | Type | Target | Algorithms |
 |:---|:---|:---|:---|:---|
@@ -89,7 +88,7 @@ The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAt
 ## 🛠️ Technologies used
 
 - **Python 3.10+**
-- **Pandas** / **NumPy** - Data manipulation
+- **Pandas** / **NumPy** - Data manipulation and metrics
 - **Matplotlib** / **Seaborn** - Visualisation
 - **Scikit-learn** - ML models (Random Forest, SVM, Logistic Regression, K-means, DBSCAN)
 - **XGBoost** - High-performance model
@@ -119,7 +118,7 @@ The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAt
 3. **Training**: cross-validation, hyperparameter tuning
 4. **Evaluation**: accuracy, F1-score, R², RMSE
 5. **Interpretation**: feature importance, cluster maps
-6. **Presentation**: PPT slides with results
+6. **Presentation**: PPT slides with results or PDF
 
 ---
 
