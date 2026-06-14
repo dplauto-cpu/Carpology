@@ -94,7 +94,6 @@ The data comes from  merging two datasets: the **MAIA** database (Mediterranean 
 
 ### Final dataset (`Med_plants.csv`)
 
-| Feature | Value |
 |:---|:---|
 | **Total samples** | 1,341 |
 | **Columns** | 20 |
