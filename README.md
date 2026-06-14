@@ -20,7 +20,7 @@ Secondary objectives:
 
 ## 📋 Quick guide
 
-The fundamentals of this project can be checked out in two documents: Technical_Report (concerning to DS) and Archaeological_Report (concerning to academic conclusions), both of them in folder `6. docs`
+The fundamentals of this project can be checked out in two documents: `Technical_Report` (concerning to DS) and `Archaeological_Report` (concerning to academic conclusions), both of them in folder `6. docs`
 
 ---
 
