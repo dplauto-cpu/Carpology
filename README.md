@@ -94,7 +94,6 @@ The data comes from  merging two datasets: the **MAIA** database (Mediterranean 
 
 ### Final dataset (`Med_plants.csv`)
 
-|:---|:---|  
 | **Total samples** | 1,341 |  
 | **Columns** | 20 |  
 | **Target classes** | Barley (586), Wheat (561) |  
