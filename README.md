@@ -48,7 +48,7 @@ Carpology, discerning cereals by isotopes/
 │ ├── 02_Transform_and_Fet_Eng.ipynb  
 │ ├── 03_EDA.ipynb  
 │ │
-│ ├── 04.Models  
+│ └── 04.Models/
 │ ├── Model1_clustering.ipynb  
 │ ├── Model2_RFC_Hy.ipynb  
 │ └── Model3_SVM.ipynb  
