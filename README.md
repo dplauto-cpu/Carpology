@@ -50,7 +50,7 @@ Carpology, discerning cereals by isotopes/
 │ └── 04.Models/  
 │ ├── Model1_clustering.ipynb  
 │ ├── Model2_RFC_Hy.ipynb  
-│ └── Model3_SVM.ipynb  
+│ ├── Model3_SVM.ipynb  
 │ ├── Model4_NB.ipynb  
 │ └── Model5_XGBo_Hy.ipynb  
 │  
