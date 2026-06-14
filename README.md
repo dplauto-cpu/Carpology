@@ -124,7 +124,7 @@ The data comes from  merging two datasets: the **MAIA** database (Mediterranean 
 
 ### Model comparison
 
-Another model was trained, but RF was finally selected. The metrics can be optimized. It is intended a follow up once the DS formation is concluded.
+RF was finally selected against XGBoost. In all probability, the metrics can be optimized in both of them. It is intended a follow up once the DS formation is concluded.
 
 | Model | Accuracy | AUC | Top feature |
 |:---|:---|:---|:---|
