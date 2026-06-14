@@ -4,124 +4,156 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-In%20development-yellow.svg)]()
+[![Status](https://img.shields.io/badge/Status-Completed-brightgreen.svg)]()
 
 ---
 
 ## 📋 Project description
 
-This project applies **Machine Learning** techniques to isotopic data (δ13C and δ15N) from archaeological cereals (mostly wheat and barley) gathered from sites across Europe and the Mediterranean.
+This project applies **Machine Learning** techniques to isotopic data (δ13C and δ15N) from archaeological cereals (barley and wheat) gathered from sites across Europe and the Mediterranean.
 
-The aim is to explore whether isotopic patterns can help to:
-- **Stablish a chonological framework** for archaeological samples without 14C
-- **Identify species** (wheat vs barley) in charred grains
-- **Estimate growing conditions** (water stress and manuring)
-- **Trace geographical origins** of cereals and regions with similar agricultural practices
+The main objective is to **classify charred seeds as barley or wheat** using isotopic, geographical, and chronological features.
+
+Secondary objectives achieved:
+- **Unsupervised clustering** (K-means) to identify isotopic groups
+- **Feature importance analysis** to understand which variables drive classification
+- **Interactive mapping** (Folium) with vintage National Geographic style
 
 ---
 
-## 🗂️ Repository
-
-ancient-crops-ml/  
+## 🗂️ Repository structure
+Carpology/  
 │  
 ├── data/  
-│ ├── maia_plants.csv # Maia dataset (2,323 samples)  
-│ ├── trigo_cebada_clean_ML.csv # Secondary dataset (3,344 samples)  
-│ └── neo_plants.csv # Main (merged) dataset (2,323 × 24)  
+│ └── Neo_Met_plants.csv # Main dataset (1341 × 20)  
 │  
 ├── notebooks/  
 │ ├── 01_EDA.ipynb # Exploratory analysis  
 │ ├── 02_preprocessing.ipynb # Cleaning and preparation  
-│ └── 03_models.ipynb # Training and evaluation  
+│ ├── 03_clustering.ipynb # K-means clustering  
+│ ├── 04_RandomForest_XGBoost.ipynb # Supervised models  
+│ └── 05_final_model.ipynb # Balanced Random Forest  
 │
-├── models/ # Trained models (pickle)  
-├── images/ # Graphs for presentation  
-├── presentation.md # Presentation script  
+├── src/  
+│ └── utils.py # Helper functions  
+│
+├── models/  
+│ ├── random_forest_balanceado.pkl # Final model  
+│ ├── scaler.pkl # StandardScaler  
+│ ├── le_periodo.pkl # LabelEncoder (period)  
+│ └── le_cuenca.pkl # LabelEncoder (basin)  
+│
+├── app_streamlit/  
+│ └── app.py # Streamlit demo app  
+│  
+├── docs/  
+│ ├── fig1_relación_isótopos.png  
+│ ├── fig2_tendencias_cuenca.png  
+│ ├── fig3_matriz_correlación.png  
+│ ├── fig4_roc.png  
+│ ├── fig5_matriz_confusión.png  
+│ ├── fig6_países_cuenca.png  
+│ └── mapa_final_con_yacimientos.html  
+│  
 ├── README.md # This file  
-└── requirements.txt # Project dependencies  
+└── memoria.md # Technical report (English)  
+
+text
 
 ---
 
 ## 📊 Dataset
 
 ### Data source
-The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAta), which compiles isotopic information from the early Neolithic to the end of the Iron Age (approx. 6000-600 BCE), merged with another dataset gathered by Carlota Pintado at the UBU (IsoTOPIKLab, University of Burgos). For the sake of this exercise the entries and variables of interest habe been merged into a new dataset: `neo_plants`.
+The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAta), merged with another dataset from the IsoTOPIKLab (University of Burgos).
 
-### Merged dataset (`neo_plants.csv`)
+### Final dataset (`Neo_Met_plants.csv`)
 
 | Feature | Value |
 |:---|:---|
-| **Total samples** | 2,323 |
-| **Columns** | 24 |
-| **Main species** | Wheat (*Triticum*), Barley (*Hordeum*) |
+| **Total samples** | 1,341 |
+| **Columns** | 20 |
+| **Target classes** | Barley (586), Wheat (561) |
 | **Geographical distribution** | Europe, Mediterranean, Near East |
-| **Cultural periods** | Neolithic, Bronze Age, Iron Age |
+| **Chronological periods** | Neolithic, Bronze Age, Iron Age |
 
 ### Key variables
 
 | Variable | Description |
 |:---|:---|
 | `IRMS_d13C_Collagen` | Carbon isotope (water stress) |
-| `d15N_Collagen` | Nitrogen isotope (manuring intensity) |
+| `d15N_Collagen` | Nitrogen isotope (aridity / manuring) |
 | `Latitude_N` / `Longitude_E` | Geographic coordinates |
-| `Genus` | Genus (Triticum / Hordeum) |
-| `Cultural_Horizon` | Archaeological period |
-| `Modern_Country` | Modern country of the site |
+| `Chronological_Period_clean` | Archaeological period |
+| `Mediterranean_Basin` | Western, Central, Eastern, or undefined |
+| `Cereal` | Target: 'barley' or 'wheat' |
 
 ---
 
-## 🎯 Proposed models (note that this is a preliminary state and it may change)
+## 🎯 Models implemented
 
-| # | Problem | Type | Target | Algorithms |
-|:---|:---|:---|:---|:---|
-| 1 | Dating by isotopes | Classification | Cultural period | RF, XGBoost, SVM |
-| 2 | Species identification | Classification | Wheat vs Barley | RF, XGBoost, Logistic Regression |
-| 3 | Water stress | Regression | δ13C | RF Reg, XGBoost Reg, Linear Reg |
-| 4 | Manuring intensity | Regression | δ15N | RF Reg, XGBoost Reg, Linear Reg |
-| 5 | Geographical origin | Classification | Country | RF, XGBoost, SVM |
-| 6 | Regional patterns | Unsupervised | Clusters | K-means, DBSCAN |
+| # | Problem | Type | Target | Best Model | Accuracy | AUC |
+|:---|:---|:---|:---|:---|:---|:---|
+| 1 | Species identification | Binary classification | Barley vs Wheat | Random Forest (balanced) | **74.78%** | 0.824 |
+| 2 | Isotopic grouping | Unsupervised clustering | 4 clusters | K-means | Silhouette: 0.42 | - |
 
-**Total: 6 models (5 supervised + 1 unsupervised)**
+### Model comparison
+
+Another model was trained, but RF was finally selected. The metrics can be optimized. It is intended a follow up once the DS formation is concluded.
+
+| Model | Accuracy | AUC | Top feature |
+|:---|:---|:---|:---|
+| Random Forest (base) | 74.35% | 0.825 | δ13C (42%) |
+| XGBoost | 74.35% | 0.813 | Latitude (28%) |
+| **Random Forest (balanced)** | **74.78%** | **0.824** | δ13C (41%) |
 
 ---
 
 ## 🛠️ Technologies used
 
 - **Python 3.10+**
-- **Pandas** / **NumPy** - Data manipulation and metrics
+- **Pandas** / **NumPy** - Data manipulation
 - **Matplotlib** / **Seaborn** - Visualisation
-- **Scikit-learn** - ML models (Random Forest, SVM, Logistic Regression, K-means, DBSCAN)
-- **XGBoost** - High-performance model
+- **Scikit-learn** - Random Forest, K-means, preprocessing
+- **XGBoost** - Gradient boosting
+- **Folium** - Interactive maps
+- **Streamlit** - Demo application
 - **Jupyter Notebooks** - Development environment
 
 ---
 
-## 📈 Project status
+## 📈 Key findings
 
-| Phase | Status |
-|:---|:---|
-| Data collection | ✅ Completed |
-| Data cleaning and merging | ✅ Completed |
-| Exploratory analysis (EDA) | 🔄 In progress |
-| Preprocessing | ⏳ Pending |
-| Model training | ⏳ Pending |
-| Evaluation and validation | ⏳ Pending |
-| Results interpretation | ⏳ Pending |
-| Final presentation | ⏳ Pending |
+1. **Isotopes alone are not sufficient** for perfect classification (≈75% accuracy)
+2. **Random Forest outperforms XGBoost** for this problem due to non-linear isotopic relationships
+3. **Class balancing** improved accuracy by +0.43%
+4. **Clustering reveals 4 distinct isotopic groups** corresponding to different water stress and aridity levels
+5. **Geographical patterns** show clear regional differences in agricultural practices
 
 ---
 
-## 🚀 Next steps
+## 🚀 How to run the project
 
-1. **Complete EDA**: visualisation of distributions, correlations, maps
-2. **Preprocessing**: handling null values, encoding categorical variables, scaling
-3. **Training**: cross-validation, hyperparameter tuning
-4. **Evaluation**: accuracy, F1-score, R², RMSE
-5. **Interpretation**: feature importance, cluster maps
-6. **Presentation**: PPT slides with results or PDF
+### 1. Clone the repository
+```bash
+git clone https://github.com/dplauto-cpu/Carpology.git
+cd Carpology
+2. Install dependencies
+bash
+pip install -r requirements.txt
+3. Run the Streamlit app
+bash
+cd app_streamlit
+streamlit run app.py
+4. Explore the notebooks
+bash
+jupyter notebook notebooks/
 
+👨‍🔬 Author
+David Larreina-García
+Archaeologist & Data Science student
+GitHub: dplauto-cpu
 ---
-
 ## 📝 How to run the project
 
 ### 1. Clone the repository
