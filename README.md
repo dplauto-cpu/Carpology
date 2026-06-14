@@ -10,64 +10,90 @@
 
 ## 📋 Project description
 
-This project applies **Machine Learning** techniques to isotopic data (δ13C and δ15N) from archaeological cereals (barley and wheat) gathered from sites across Europe and the Mediterranean.
+This project applies **Machine Learning** techniques to isotopic data (δ13C and δ15N) from archaeological cereals (barley and wheat) gathered from archaeological sites across the Mediterranean. Specifically, from eight modern countries: Cyprus, France, Greece, Italy, Morocco, Spain, Syria and Turkey.
 
-The main objective is to **classify charred seeds as barley or wheat** using isotopic, geographical, and chronological features.
+The main objective is to **discern charred seeds as barley or wheat** using isotopic, geographical, and chronological features.
 
-Secondary objectives achieved:
-- **Unsupervised clustering** (K-means) to identify isotopic groups
+Secondary objectives:
 - **Feature importance analysis** to understand which variables drive classification
 - **Interactive mapping** (Folium) with vintage National Geographic style
+
+## 📋 Quick guide
+
+The fundamentals of this project can be checked out in two documents: Technical_Report (concerning to DS) and Archaeological_Report (concerning to academic conclusions), both of them in folder `6. docs`
 
 ---
 
 ## 🗂️ Repository structure
-Carpology/  
+Carpology, discerning cereals by isotopes/  
 │  
 ├── data/  
-│ └── Neo_Met_plants.csv # Main dataset (1341 × 20)  
+│ ├── raw/  
+│ │ ├── maia_plant.csv  
+│ │ └── trigo_cebada_clean.csv *This dataset is not included, is a private working dataset from IsoTOPIK  
+│ │  
+│ ├── processed/  
+│ │ ├── Med_Plants.csv  
+│ │  
+│ ├── train/  
+│ │ ├── X_train.csv  
+│ │ └── y_train.csv  
+│ │  
+│ └── test/  
+│ ├── X_test.csv  
+│ └── y_test.csv  
 │  
 ├── notebooks/  
-│ ├── 01_EDA.ipynb # Exploratory analysis  
-│ ├── 02_preprocessing.ipynb # Cleaning and preparation  
-│ ├── 03_clustering.ipynb # K-means clustering  
-│ ├── 04_RandomForest_XGBoost.ipynb # Supervised models  
-│ └── 05_final_model.ipynb # Balanced Random Forest  
-│
+│ ├── 01_Sources.ipynb  
+│ ├── 02_Transform_and_Fet_Eng.ipynb  
+│ ├── 03_EDA.ipynb  
+│ │
+│ ├── 04.Models  
+│ ├── Model1_clustering.ipynb  
+│ ├── Model2_RFC_Hy.ipynb  
+│ └── Model3_SVM.ipynb  
+│ ├── Model4_NB.ipynb  
+│ └── Model5_XGBo_Hy.ipynb  
+│  
 ├── src/  
-│ └── utils.py # Helper functions  
-│
+│ ├── data_processing.py  
+│ ├── training.py  
+│ └── evaluation.py  
+│  
 ├── models/  
-│ ├── random_forest_balanceado.pkl # Final model  
-│ ├── scaler.pkl # StandardScaler  
-│ ├── le_periodo.pkl # LabelEncoder (period)  
-│ └── le_cuenca.pkl # LabelEncoder (basin)  
-│
+│ ├── final_model_random.pkl  
+│ ├── trained_XGBoost_model.pkl  
+│ ├── trained_svm_model.pkl  
+│ ├── trained_kmeans_model.pkl  
+│ ├── trained_naive_bayes.pkl  
+│ └── model_config.yaml  
+│  
 ├── app_streamlit/  
-│ └── app.py # Streamlit demo app  
+│ ├── app.py  
+│ └── requirements.txt  
 │  
 ├── docs/  
-│ ├── fig1_relación_isótopos.png  
-│ ├── fig2_tendencias_cuenca.png  
+│ ├── Technical_Report.ipynb  
+│ ├── Archaeological_Report.ipynb  
+│ ├── fig1_Relacion_isotopos.png  
+│ ├── fig2_Tendencias_cuenca.png  
 │ ├── fig3_matriz_correlación.png  
-│ ├── fig4_roc.png  
-│ ├── fig5_matriz_confusión.png  
+│ ├── fig4_ROC_RF.png  
+│ ├── fig5_matriz confusión.png   
+│ ├── fig5_matriz confusión.png   
 │ ├── fig6_países_cuenca.png  
-│ └── mapa_final_con_yacimientos.html  
+│ └──mapa_arqueologico_final.html  
 │  
-├── README.md # This file  
-└── memoria.md # Technical report (English)  
-
-text
+├── README.md  
 
 ---
 
 ## 📊 Dataset
 
 ### Data source
-The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAta), merged with another dataset from the IsoTOPIKLab (University of Burgos).
+The data comes from  merging two datasets: the **MAIA** database (Mediterranean Archive of Isotopic dAta), merged with another dataset gathered by a member of the Research Group at the IsoTOPIKLab (University of Burgos, UBU).
 
-### Final dataset (`Neo_Met_plants.csv`)
+### Final dataset (`Med_plants.csv`)
 
 | Feature | Value |
 |:---|:---|
@@ -75,7 +101,7 @@ The data comes from the **MAIA** database (Mediterranean Archive of Isotopic dAt
 | **Columns** | 20 |
 | **Target classes** | Barley (586), Wheat (561) |
 | **Geographical distribution** | Europe, Mediterranean, Near East |
-| **Chronological periods** | Neolithic, Bronze Age, Iron Age |
+| **Chronological periods** | Neolithic to Iron_Roman (see Archaeological Report |
 
 ### Key variables
 
@@ -151,12 +177,6 @@ jupyter notebook notebooks/
 
 👨‍🔬 Author
 David Larreina-García
-Archaeologist & Data Science student
+Archaeologist
 GitHub: dplauto-cpu
 ---
-## 📝 How to run the project
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/your_username/ancient-crops-ml.git
-cd ancient-crops-ml
