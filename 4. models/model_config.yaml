@@ -1,0 +1,62 @@
+modelo:
+  nombre: Random Forest
+  tipo: Clasificación binaria
+  objetivo: Clasificar cebada vs trigo
+  version: balanceado
+  hiperparametros:
+    n_estimators: 100
+    max_depth: 20
+    min_samples_split: 2
+    class_weight: balanced
+    random_state: 42
+  rendimiento:
+    accuracy: 74.78%
+    auc: 0.824
+    precision_trigo: 0.71
+    recall_trigo: 0.74
+    f1_score_trigo: 0.72
+  importancia_variables:
+    d13C: 41%
+    d15N: 28%
+    latitud: 13%
+    longitud: 10%
+    periodo: 5%
+    cuenca: 3%
+preprocesadores:
+  scaler:
+    tipo: StandardScaler
+    descripcion: Estandariza las variables numéricas (media=0, desviación=1)
+  le_periodo:
+    tipo: LabelEncoder
+    clases:
+    - Chalcolithic
+    - Early_Bronze_Age
+    - Early_Iron_Age
+    - Late_Iron_Age
+    - Late_Neolithic
+    - Middle_Late_Bronze_Age
+    - Neolithic
+    - Other
+  le_cuenca:
+    tipo: LabelEncoder
+    clases:
+    - Central_Med
+    - Eastern_Med
+    - Western_Med
+    - other
+features:
+- IRMS_d13C_Collagen (δ13C)
+- d15N_Collagen (δ15N)
+- Latitude_N (Latitud)
+- Longitude_E (Longitud)
+- Chronological_Period_clean (Periodo)
+- Mediterranean_Basin (Cuenca)
+dataset:
+  nombre: Med_Plants.csv
+  muestras: 1341
+  cebada: 586
+  trigo: 561
+  otras_plantas: 194
+fecha_entrenamiento: '2026-06-14'
+autor: David Larreina-García
+repositorio: https://github.com/dplauto-cpu/Carpology
