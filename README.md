@@ -20,7 +20,7 @@ Secondary objectives:
 
 ## 📋 Quick guide
 
-The fundamentals of this project can be checked out in two documents: Technical_Report (concerning to DS) and Archaeological_Report (concerning to academic conclusions), both of them in folder `6. docs`
+The fundamentals of this project can be checked out in two documents: `Technical_Report` (concerning to DS) and `Archaeological_Report` (concerning to academic conclusions), both of them in folder `6. docs`
 
 ---
 
@@ -47,11 +47,10 @@ Carpology, discerning cereals by isotopes/
 │ ├── 01_Sources.ipynb  
 │ ├── 02_Transform_and_Fet_Eng.ipynb  
 │ ├── 03_EDA.ipynb  
-│ │
-│ ├── 04.Models  
+│ └── 04.Models/  
 │ ├── Model1_clustering.ipynb  
 │ ├── Model2_RFC_Hy.ipynb  
-│ └── Model3_SVM.ipynb  
+│ ├── Model3_SVM.ipynb  
 │ ├── Model4_NB.ipynb  
 │ └── Model5_XGBo_Hy.ipynb  
 │  
@@ -95,13 +94,13 @@ The data comes from  merging two datasets: the **MAIA** database (Mediterranean 
 
 ### Final dataset (`Med_plants.csv`)
 
-| Feature | Value |
+| Feature | Description |
 |:---|:---|
-| **Total samples** | 1,341 |
-| **Columns** | 20 |
-| **Target classes** | Barley (586), Wheat (561) |
-| **Geographical distribution** | Europe, Mediterranean, Near East |
-| **Chronological periods** | Neolithic to Iron_Roman (see Archaeological Report |
+| **Total samples** | 1,341 |  
+| **Columns** | 20 |  
+| **Target classes** | Barley (586), Wheat (561) |  
+| **Geographical distribution** | Europe, Mediterranean, Near East |  
+| **Chronological periods** | Neolithic to Iron_Roman (see Archaeological Report |  
 
 ### Key variables
 
@@ -125,7 +124,7 @@ The data comes from  merging two datasets: the **MAIA** database (Mediterranean 
 
 ### Model comparison
 
-Another model was trained, but RF was finally selected. The metrics can be optimized. It is intended a follow up once the DS formation is concluded.
+RF was finally selected against XGBoost. In all probability, the metrics can be optimized in both of them. It is intended a follow up once the DS formation is concluded.
 
 | Model | Accuracy | AUC | Top feature |
 |:---|:---|:---|:---|
